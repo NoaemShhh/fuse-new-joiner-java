@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.aspect4log.Log;
 import net.sf.aspect4log.Log.Level;
+import org.galatea.starter.domain.IexHistoricalPrices;
 import org.galatea.starter.domain.IexLastTradedPrice;
 import org.galatea.starter.domain.IexSymbol;
 import org.galatea.starter.service.IexService;
@@ -48,4 +49,17 @@ public class IexRestController {
     return iexService.getLastTradedPriceForSymbols(symbols);
   }
 
+  /**
+   * Get historical trade prices for each of the symbols passed in from a date passed in to present.
+   *
+   * @param from date that the prices start from
+   * @return a List of IexHistoricalPrices objects for the given symbols from a date.
+   */
+  @GetMapping(value = "${mvc.iex.getHistoricalPricesPath}", produces = {
+      MediaType.APPLICATION_JSON_VALUE})
+  public List<IexHistoricalPrices> getHistoricalPrices(
+      @RequestParam(value = "from") final String from,
+      @RequestParam(value = "symbols") final String symbols) {
+    return iexService.getHistoricalPricesFrom(from, symbols);
+  }
 }
