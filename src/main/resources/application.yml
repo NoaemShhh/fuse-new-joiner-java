@@ -23,7 +23,7 @@ mvc:
    getMissionsPath: /settlementEngine/missions
    deleteMissionPath: /settlementEngine/mission/
    iex:
-      getAllSymbolsPath: /ref-data/symbols
+      getAllSymbolsPath: /get-all-symbols
       getLastTradedPricePath: /last-trade-price
       getHistoricalPricesPath: /historical-prices
    max-size-trace-payload: 50000

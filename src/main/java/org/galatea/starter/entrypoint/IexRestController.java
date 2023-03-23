@@ -1,6 +1,8 @@
 package org.galatea.starter.entrypoint;
 
+import java.util.Date;
 import java.util.List;
+
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +12,7 @@ import org.galatea.starter.domain.IexHistoricalPrices;
 import org.galatea.starter.domain.IexLastTradedPrice;
 import org.galatea.starter.domain.IexSymbol;
 import org.galatea.starter.service.IexService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,8 +60,7 @@ public class IexRestController {
    */
   @GetMapping(value = "${mvc.iex.getHistoricalPricesPath}", produces = {
       MediaType.APPLICATION_JSON_VALUE})
-  public List<IexHistoricalPrices> getHistoricalPrices(
-      @RequestParam(value = "from") final String from,
+  public List<IexHistoricalPrices> getHistoricalPrices(@RequestParam(value = "from") @DateTimeFormat(pattern = "yyyy-MM-dd") final Date from,
       @RequestParam(value = "symbols") final String symbols) {
     return iexService.getHistoricalPricesFrom(from, symbols);
   }

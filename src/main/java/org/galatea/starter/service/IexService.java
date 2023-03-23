@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -29,9 +30,8 @@ public class IexService {
 
   {
     try {
-      token = Files.readString(Path.of(
-          "C:\\Users\\noaem\\Downloads\\fuse-new-joiner-java-develop"
-              + "\\fuse-new-joiner-java-develop\\src\\main\\resources\\Secrets.txt"));
+      token = Files.readString(Path.of("C:\\Users\\nshurin\\IdeaProjects\\fuse-new-joiner-java\\src\\main" +
+              "\\resources\\Secrets.txt"));
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -71,7 +71,7 @@ public class IexService {
    * @param from date from which the historical prices begin.
    * @return a list of prices for the symbol passed in beginning from a specific date.
    */
-  public List<IexHistoricalPrices> getHistoricalPricesFrom(final String from,
+  public List<IexHistoricalPrices> getHistoricalPricesFrom(final Date from,
       final String symbols) {
     return iexClient.getHistoricalPricesFrom(from, symbols, token);
   }

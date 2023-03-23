@@ -1,5 +1,6 @@
 package org.galatea.starter.service;
 
+import java.util.Date;
 import java.util.List;
 import org.galatea.starter.domain.IexHistoricalPrices;
 import org.galatea.starter.domain.IexLastTradedPrice;
@@ -43,7 +44,7 @@ public interface IexClient {
    */
 
   @GetMapping("/data/core/historical_prices/{symbols}")
-  List<IexHistoricalPrices> getHistoricalPricesFrom(@RequestParam("from") String from,
+  List<IexHistoricalPrices> getHistoricalPricesFrom(@RequestParam("from") Date from,
       @PathVariable("symbols")String symbols,
       @RequestParam("token") String token);
 
