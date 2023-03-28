@@ -1,10 +1,13 @@
 package org.galatea.starter.service;
 
+import java.util.Date;
 import java.util.List;
+import org.galatea.starter.domain.IexHistoricalPrices;
 import org.galatea.starter.domain.IexLastTradedPrice;
 import org.galatea.starter.domain.IexSymbol;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -18,10 +21,10 @@ public interface IexClient {
    * Get a list of all stocks supported by IEX. See https://iextrading.com/developer/docs/#symbols.
    * As of July 2019 this returns almost 9,000 symbols, so maybe don't call it in a loop.
    *
-   * @return a list of all of the stock symbols supported by IEX.
+   * @return a list of all the stock symbols supported by IEX.
    */
   @GetMapping("/ref-data/symbols")
-  List<IexSymbol> getAllSymbols();
+  List<IexSymbol> getAllSymbols(@RequestParam("token") String token);
 
   /**
    * Get the last traded price for each stock symbol passed in. See https://iextrading.com/developer/docs/#last.
@@ -30,6 +33,20 @@ public interface IexClient {
    * @return a list of the last traded price for each of the symbols passed in.
    */
   @GetMapping("/tops/last")
-  List<IexLastTradedPrice> getLastTradedPriceForSymbols(@RequestParam("symbols") String[] symbols);
+  List<IexLastTradedPrice> getLastTradedPriceForSymbol(@RequestParam("symbols") String[] symbols,
+      @RequestParam ("token") String token);
+
+  /**
+   * Get the last traded price for each stock symbol passed in.
+   *
+   * @param from date that the prices start from.
+   * @return a list of the last traded price for each of the symbols passed in.
+   */
+
+  @GetMapping("/data/core/historical_prices/{symbols}")
+  List<IexHistoricalPrices> getHistoricalPricesFrom(@RequestParam("from") Date from,
+      @PathVariable("symbols") String[] symbols,
+      @RequestParam("token") String token);
+
 
 }

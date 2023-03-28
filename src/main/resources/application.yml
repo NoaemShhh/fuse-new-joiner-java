@@ -23,8 +23,9 @@ mvc:
    getMissionsPath: /settlementEngine/missions
    deleteMissionPath: /settlementEngine/mission/
    iex:
-      getAllSymbolsPath: /iex/symbols
-      getLastTradedPricePath: /iex/lastTradedPrice
+      getAllSymbolsPath: /get-all-symbols
+      getLastTradedPricePath: /last-trade-price
+      getHistoricalPricesPath: /historical-prices
    max-size-trace-payload: 50000
 jms:
    listener-concurrency: 1-5
@@ -37,6 +38,9 @@ log.level.org.galatea.starter.service.IEXClient: DEBUG
 # CONDITIONS EVALUATION REPORT on startup
 logging.level.org.springframework.boot.autoconfigure: INFO
 
+# API token to be used in the Iex service
+authorization:
+   apiToken: pk_151a24b63d9e4b87a73b724583f460ec
 ---
 # Test properties go here
 spring:
@@ -56,7 +60,7 @@ spring:
       username: sa
       password:
    rest:
-      iexBasePath: https://api.iextrading.com/1.0
+      iexBasePath: https://api.iex.cloud/v1/
 # set debug to get spring to log the classpath (and other things) on startup
 debug: true
 
