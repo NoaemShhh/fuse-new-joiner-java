@@ -38,6 +38,9 @@ log.level.org.galatea.starter.service.IEXClient: DEBUG
 # CONDITIONS EVALUATION REPORT on startup
 logging.level.org.springframework.boot.autoconfigure: INFO
 
+# API token to be used in the Iex service
+authorization:
+   apiToken: pk_151a24b63d9e4b87a73b724583f460ec
 ---
 # Test properties go here
 spring:
